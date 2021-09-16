@@ -16,7 +16,9 @@ app.use(cors());
 
 //app.use(require("./middleware/validate-jwt"));
 
-app.use("/log", controllers.logController);
+//app.use("/log", controllers.logController);
+app.use("/postprimary", require("./controllers/postPrimaryController"));
+app.use("/postsecondary", require("./controllers/postSecondaryController"));
 
 db.authenticate()
   .then(() => db.sync()) 
