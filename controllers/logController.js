@@ -5,12 +5,13 @@ const { LogModel } = require("../models");
 
 // Create log
 router.post("/create", validateJWT, async (req, res) => {
-    const { date, content, thoughts } = req.body.log;
+    const { date, title, location, description } = req.body.log;
     const { id } = req.user;
     const logEntry = {
         date,
-        content,
-        thoughts,
+        title,
+        location,
+        description,
         owner_id: id
     }
     try {
@@ -49,7 +50,7 @@ router.get("/mine", validateJWT, async (req, res) => {
 
 // Update a log
 router.put("/update/:id", validateJWT, async (req, res) => {
-    const { date, content, thoughts } = req.body.log;
+    const { date, title, location, description } = req.body.log;
     const logId = req.params.id;
     const userId = req.user.id;
 
@@ -62,8 +63,9 @@ router.put("/update/:id", validateJWT, async (req, res) => {
 
     const updatedLog = {
         date: date,
-        content: content,
-        thoughts: thoughts
+        title: title,
+        location: location,
+        description: description
     };
 
     try {
