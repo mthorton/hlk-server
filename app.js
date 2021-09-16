@@ -1,11 +1,14 @@
 require('dotenv').config()
 const express = require('express');
 const { synceDb } = require('./db');
+const cors=require('cors'); //added
 const app = express()
 const port = 3000
 
 ;(async() => {
   app.use(express.json())
+
+  app.use(require('./middleware/headers')); //added
 
   const auth = require('./controllers/Auth')
   app.use("/auth", auth)

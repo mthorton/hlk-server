@@ -5,11 +5,10 @@ const { LogModel } = require("../models");
 
 // Create log
 router.post("/create", validateJWT, async (req, res) => {
-    const { date, genre, content, thoughts } = req.body.log;
+    const { date, content, thoughts } = req.body.log;
     const { id } = req.user;
     const logEntry = {
         date,
-        genre,
         content,
         thoughts,
         owner_id: id
@@ -50,7 +49,7 @@ router.get("/mine", validateJWT, async (req, res) => {
 
 // Update a log
 router.put("/update/:id", validateJWT, async (req, res) => {
-    const { date, genre, content, thoughts } = req.body.log;
+    const { date, content, thoughts } = req.body.log;
     const logId = req.params.id;
     const userId = req.user.id;
 
@@ -63,7 +62,6 @@ router.put("/update/:id", validateJWT, async (req, res) => {
 
     const updatedLog = {
         date: date,
-        genre: genre,
         content: content,
         thoughts: thoughts
     };
@@ -97,52 +95,3 @@ router.delete("/delete/:id", validateJWT, async (req, res) => {
 });
 
 module.exports = router;
-
-/*
-
-let express = require('express')
-let router = express.Router()
-const { PostPrimary, User } = require('../models')
-
-router.post("/create/", async(req, res) => {
-    let message;
-
-    try{
-        let u = await User.findOne({ where: { id: req.body.id } })
-        if (u) {
-            let post = await PostPrimary.create({ content: req.body.content })
-            await u.addPost(post)
-
-            let { id, content } = await PostPrimary.findOne({ where: { id: post.id } })
-            message = { message: "Post made!", data: { id, content }}    
-        }
-        else {
-            message = { message: "Can't make a post, user does not exist", data: null }
-        }
-
-    } catch(err) {
-        message = { message: "Post Primary Create Failed" }
-    }
-
-    res.json(message)
-
-})
-
-router.get("/all/:id", async(req, res) => {
-    let u = await User.findOne({ where: { id: req.params.id }})
-    let posts = u ? await u.getPosts() : null
-    if (posts){
-        let cleaned_posts = posts.map( p => {
-                    const { id, content } = p
-                    return { id, content }
-        })
-
-        res.send(cleaned_posts)
-    }
-    else
-        res.send(posts)
-})
-
-module.exports = router
-
-*/
