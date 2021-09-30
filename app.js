@@ -27,7 +27,7 @@ db.authenticate()
   .then(() => db.sync()) 
   //.then(() => db.sync( { force:true })) 
   .then(() => {
-    app.listen(process.env.PORT, () => console.log(`[Server]: App is listening on ${process.env.PORT}`));
+    app.listen(process.env.PORT, () => console.log(`[Server]: App is listening on port ${process.env.PORT}`));
   })
   .catch((err) => {
     console.log(`[Server] has crashed: ${err}`);
