@@ -5,13 +5,14 @@ const { PostSecondaryModel } = require("../models");
 
 // Create Primary Post
 router.post("/create", validateJWT, async (req, res) => {
-    const { date, post, thoughts } = req.body.postsecondary; //change
+    const { date, post, thoughts, postprimaryId } = req.body.postsecondary; //change
     const { id } = req.user;
     const logEntry = {
         date,
         post,
         thoughts,
-        owner_id: id
+        postprimaryId,
+        owner_id: id,
     }
     try {
         const newLog = await PostSecondaryModel.create(logEntry);
@@ -22,10 +23,17 @@ router.post("/create", validateJWT, async (req, res) => {
 });
 
 // Get all logs
-router.get("/all", async (req, res) => {
+router.get("/all/:id", async (req, res) => {
+    // const { postprimaryId } = req.postSecondary;
+    const postId = req.params.id
+
     try {
-        const events = await PostSecondaryModel.findAll();
-        res.status(200).json(events);
+        const posts = await PostSecondaryModel.findAll({
+            where: {
+                postprimaryId: postId
+            }
+        });
+        res.status(200).json(posts);
     } catch (err) {
         res.status(500).json({ error: err });
     }

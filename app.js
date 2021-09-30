@@ -3,6 +3,9 @@ const Express = require("express"); // api framework
 const cors=require('cors');
 const app = Express();
 
+// app.use(bodyParser.json()) // for parsing application/json
+// app.use(bodyParser.urlencoded({ extended: true }))
+
 const db = require("./db"); // connects to database
 
 const controllers = require("./controllers");

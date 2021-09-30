@@ -2,6 +2,7 @@ const Express = require("express"); // Gateway to using Express methods.
 const router = Express.Router();
 let validateJWT = require("../middleware/validate-jwt");
 const { PostPrimaryModel } = require("../models");
+const { PostSecondaryModel } = require("../models");
 
 // Create Primary Post
 router.post("/create", validateJWT, async (req, res) => {
@@ -25,7 +26,7 @@ router.post("/create", validateJWT, async (req, res) => {
 // Get all logs
 router.get("/all", async (req, res) => {
     try {
-        const events = await PostPrimaryModel.findAll();
+        const events = await PostPrimaryModel.findAll({include: PostSecondaryModel});
         res.status(200).json(events);
     } catch (err) {
         res.status(500).json({ error: err });
