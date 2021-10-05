@@ -24,8 +24,8 @@ app.use("/postprimary", require("./controllers/postPrimaryController"));
 app.use("/postsecondary", require("./controllers/postSecondaryController"));
 
 db.authenticate()
-  //.then(() => db.sync()) 
-  .then(() => db.sync( { force:true })) 
+  .then(() => db.sync()) 
+  //.then(() => db.sync( { force:true })) 
   .then(() => {
     app.listen(process.env.PORT, () => console.log(`[Server]: App is listening on port ${process.env.PORT}`));
   })
