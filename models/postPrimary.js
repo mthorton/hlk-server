@@ -11,11 +11,11 @@ const PostPrimary = db.define("postprimary", { // pp = post primary
         allowNull: false,
     },
     post: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(1000),
         allowNull: false,
     },
     thoughts: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(1000),
         allowNull: false,
     },
     owner_id: {

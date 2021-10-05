@@ -7,11 +7,11 @@ const PostSecondary = db.define("postsecondary", { // pp = post primary
         allowNull: false,
     },
     post: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(1000),
         allowNull: false,
     },
     thoughts: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(1000),
         allowNull: false,
     },
     postprimaryId: {
